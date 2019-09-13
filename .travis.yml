@@ -1,5 +1,3 @@
-language: c,cpp 
-
 compiler:
   - clang
-  - gcc
+
