@@ -124,6 +124,8 @@ int lengtha = strlen(word);
 //printf("length of word: %d", lengtha);
 if((isalpha(word[lengtha-1])) == 0){
 	word[lengtha-1] = '\0';}
+if((isalpha(word[0])) == 0){
+	word[0] = '\0';}
 	result = check_word(word, hashtable);
 	if((result == false) && ((strlen(word)) > 1)){
      misspelled[num_misspelled] = malloc(strlen(word)+1);    
