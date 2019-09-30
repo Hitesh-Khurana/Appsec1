@@ -98,22 +98,22 @@ return true;
 
 int check_words(FILE *fp, hashmap_t hashtable[], char* misspelled[])
 {
-
 //char c;
 int num_misspelled =0;
 int i = 0;
 char word[LENGTH + 1]="\0";
 char tempb[LENGTH + 1]="\0";
 bool result = true;
-
 while (fscanf(fp, "%46s", tempb) != EOF){
 int lengthaa= strlen(tempb); //if null byte doesnt exist break out of the loop
+
 	if (lengthaa > LENGTH)
 		continue;
   for(i=0;i<=45;i++){ 
   if((tempb[i] == ' ') || (tempb[i] == '\n') || (tempb[i] == '\r')){
 		break;}
 	
+
   else{
 	//printf("%c",c);
 	word[i] = tolower(tempb[i]);}
@@ -124,12 +124,6 @@ int lengtha = strlen(word);
 //printf("length of word: %d", lengtha);
 if((isalpha(word[lengtha-1])) == 0){
 	word[lengtha-1] = '\0';}
-//if((isalpha(word[0])) == 0)
-//	word[0] = '\0';
-    
-//word[45]='s';
-//printf("bro this is word %s\n",word);
-//printf("iteration %d ||| word is : %s\n", lengtha, word);
 	result = check_word(word, hashtable);
 	if((result == false) && ((strlen(word)) > 1)){
      misspelled[num_misspelled] = malloc(strlen(word)+1);    
@@ -142,5 +136,6 @@ memset(word, 0, sizeof(word));
 
 return num_misspelled;
 }
+
 
 
