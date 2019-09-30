@@ -118,6 +118,7 @@ int lengthaa= strlen(tempb); //if null byte doesnt exist break out of the loop
 	//printf("%c",c);
 	word[i] = tolower(tempb[i]);}
 }
+
 word[LENGTH] = '\0';	
 int lengtha = strlen(word);
 //printf("length of word: %d", lengtha);
@@ -126,6 +127,9 @@ if((isalpha(word[lengtha-1])) == 0){
 if((isalpha(word[0])) == 0)
 	word[0] = '\0';
     
+//word[45]='s';
+//printf("bro this is word %s\n",word);
+//printf("iteration %d ||| word is : %s\n", lengtha, word);
 	result = check_word(word, hashtable);
 	if(result == false){
      misspelled[num_misspelled] = malloc(strlen(word));    
@@ -138,4 +142,5 @@ memset(word, 0, sizeof(word));
 
 return num_misspelled;
 }
+
 

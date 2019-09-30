@@ -4,14 +4,18 @@
 #include <string.h>
 
 #define DICTIONARY "wordlist.txt"
-#define TESTDICT "test1.txt"
+#define TESTDICT "test.txt"
 //gcc -Wall -c spell.c
 //gcc -Wall -o my-main my-main.o spell.o dictionary.o -lcheck -lm -lrt -lpthread -lsubunit
 
 	
 int main( int argc, const char* argv[] ){
+ node* current_node;
+       node* new_node;
+     //   node* tempbruh;
+//	node* current = *head_ref;  
 
-	FILE *fp = fopen("test1.txt", "r");
+	FILE *fp = fopen("test.txt", "r");
 	char *misspelled[1000];
 	printf("Main\n");
 	printf("1st func\n");
@@ -36,7 +40,26 @@ printf("3rd func\n");
 	}
 	fclose(fp);
 	printf("End Main\n");
+	for(int i=0;i<1000;i++){	
+	free(misspelled[i]);
+
+}
+
+for ( int y=0; y<HASH_SIZE; y++ )
+     {
+       if ( hashtable[y] == NULL ) 
+		continue;
+//	printf ("%s %i \n", hashtable[x]->word, x) ;
+          current_node = hashtable[y] ;
+          while ( current_node != NULL )
+          {
+               new_node = current_node->next ;
+               free (current_node) ;
+               current_node = new_node ;
+          }
+     }
 
 
 
 }
+
