@@ -1,0 +1,57 @@
+How my code works.
+------------------Check-Word------------------
+Takes the input word and the input hashtable (Load Dictionary has to run first)
+Converts the word to lower case this is done character by character, runs until the size of the characters is hit.
+Convert the hash of the lowercase word and set it to bucket.
+pointer, points to the hash location of the hashtable. For example 'testword' The hash of this lets say is 20.
+Then hashtable[20] is where the points is set.
+
+Check if the word entered in lowercase is the word in the location of the hash.
+Meaning if 'testword' is the word located at hashtable[20]
+
+if this is correct then return true or increment to the next hashtable location.
+
+otherwise return false
+
+------------------Load dictionary------------------
+This runs first.
+Takes the dictionary file and the hashtable.
+
+We initalize the the hashtable to NULL Values
+open the dictioary file.
+get the first 46 characters and place these in the array worda
+check worda --
+	if we find a space or a new line enter a null value
+	else set the character to lowercase and set this value to the variable temp.
+
+allocate memory matching the size of the word which should be set to the size of the current node.
+(should be the head of the linked list since this is initalized as so.)
+set pointer hash equal to this allocate memory in the hashtable.
+(this should be the size of the head node at the headnode.)
+now we move hash to the next null section in the linked list.
+and copy the lowercase word into this section.
+then we hash that word that is in the target section.
+if the hash value is less than 2000 (max size of the linked list)
+	then check if our hash value in our linkedlist is set to a null. Meaning if the location is empty. for the target hash. (there is no word in the location)
+	set hash to the next null node. and put the hash here.
+else the next area in the linkedlist will be the word we are referecing.
+	Now set the hash node to this area of the linkedlist. 
+close the file.
+essentially this block of code moves the pointer in order to hit the entire linked list with the proper hash value.
+1->2->3->(hash the word. If the value is number 1, enter the word there. This can be proved when printing the hashtable.)
+return true 
+	
+	
+------------------Checks_Words------------------
+Pass in the test word file and the hashtable and the number of misspelled characters array
+
+Take the first 46 characters of the test wordlist and check it. We are looking for spaces new lines and \r's
+If we dont find thos then convert the line to lowercase and set it to the word array.
+Set a null terminal at the end of the word array given the size of the length of the input line (should always be 45. To mitigate bufferoverflows.
+Check the first two characters and see if they are alphabetical. if they are not then change the character to a null to skip it.
+	Then check if the word is in the dictionary.
+	If the word is not in the dictionary then set dynamically allocate memory to the end of the line and set this word in misspelled.
+		Increment the amount of misspelled items in the array. 
+clear the array word in order to reset the application.
+return the misspelled array
+		
