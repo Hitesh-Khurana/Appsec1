@@ -1,6 +1,8 @@
 language: c
-language: cpp
-
-compiler:
-  - clang
-script: make test
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y check
+compiler: gcc
+script:
+  - make
+  - make test
