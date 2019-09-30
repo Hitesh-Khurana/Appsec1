@@ -124,15 +124,15 @@ int lengtha = strlen(word);
 //printf("length of word: %d", lengtha);
 if((isalpha(word[lengtha-1])) == 0){
 	word[lengtha-1] = '\0';}
-if((isalpha(word[0])) == 0)
-	word[0] = '\0';
+//if((isalpha(word[0])) == 0)
+//	word[0] = '\0';
     
 //word[45]='s';
 //printf("bro this is word %s\n",word);
 //printf("iteration %d ||| word is : %s\n", lengtha, word);
 	result = check_word(word, hashtable);
-	if(result == false){
-     misspelled[num_misspelled] = malloc(strlen(word));    
+	if((result == false) && ((strlen(word)) > 1)){
+     misspelled[num_misspelled] = malloc(strlen(word)+1);    
 	 strcpy(misspelled[num_misspelled], word);
 	num_misspelled++;
 }

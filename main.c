@@ -7,16 +7,38 @@
 #define TESTDICT "test.txt"
 //gcc -Wall -c spell.c
 //gcc -Wall -o my-main my-main.o spell.o dictionary.o -lcheck -lm -lrt -lpthread -lsubunit
+/**
+Commands to test with valgrind.
+gcc -Wall -o my-main my-main.c -g spell.c dictionary.o -lcheck -lm -lrt -lpthread -lsubunit
+valgrind --track-origins=yes --leak-check=full ./my-main 
 
-	
+
+//gcc -Wall -c spell.c
+//gcc -Wall -o my-main my-main.o spell.o dictionary.o -lcheck -lm -lrt -lpthread -lsubunit
+Commands to test with valgrind.
+gcc -Wall -o my-main my-main.c -g spell.c dictionary.o -lcheck -lm -lrt -lpthread -lsubunit
+valgrind --track-origins=yes --leak-check=full ./my-main 
+
+
+
+AFL
+gcc -o my-main spell.c dictionary.c my-main.c -g
+
+afl-gcc -o my-main my-main.c spell.c dictionary.c dictionary.h
+afl-cmin -i test-cases/ -o tests -- ./my-main @@ wordlist.txt 
+afl-fuzz -i tests/ -o output ./my-main @@ wordlist.txt 
+
+**/
+
+
 int main( int argc, const char* argv[] ){
  node* current_node;
        node* new_node;
      //   node* tempbruh;
 //	node* current = *head_ref;  
-
+int num_misspelled =0;
 	FILE *fp = fopen("test.txt", "r");
-	char *misspelled[1000];
+	char *misspelled[MAX_MISSPELLED];
 	printf("Main\n");
 	printf("1st func\n");
 	hashmap_t hashtable[HASH_SIZE];
@@ -33,14 +55,12 @@ printf("2nd func\n");
 	    return -1;
 	}
 printf("3rd func\n");
-	bool checksw = check_words(fp, hashtable, misspelled);
-	if (!checksw) {
-	     printf("Failed to check the wordsss\n");
-	    return -1;
-	}
+    num_misspelled = check_words(fp, hashtable, misspelled);
+	
 	fclose(fp);
 	printf("End Main\n");
-	for(int i=0;i<1000;i++){	
+printf("value of num_misspelled: %d\n",num_misspelled);
+	for(int i=0;i<num_misspelled;i++){	
 	free(misspelled[i]);
 
 }
@@ -62,4 +82,3 @@ for ( int y=0; y<HASH_SIZE; y++ )
 
 
 }
-
